@@ -98,15 +98,15 @@ const createUser = async (req, res, next) => {
     return next(error);
   }
 
-  // const logEntry = `${new Date().toISOString()} - ${savedUser.id} - ${email}\n`;
+  const logEntry = `${new Date().toISOString()} - ${savedUser.id} - ${email}\n`;
 
-  // fs.appendFile(
-  //   path.join('/app', 'users', 'users-log.txt'),
-  //   logEntry,
-  //   (err) => {
-  //     console.log(err);
-  //   }
-  // );
+  fs.appendFile(
+    path.join('/app', 'users', 'users-log.txt'),
+    logEntry,
+    (err) => {
+      console.log(err);
+    }
+  );
 
   res
     .status(201)
@@ -155,17 +155,17 @@ const verifyUser = async (req, res, next) => {
   }
 };
 
-// const getLogs = (req, res, next) => {
-//   fs.readFile(path.join('/app', 'users', 'users-log.txt'), (err, data) => {
-//     if (err) {
-//       createAndThrowError('Could not open logs file.', 500);
-//     } else {
-//       const dataArr = data.toString().split('\n');
-//       res.status(200).json({ logs: dataArr });
-//     }
-//   });
-// };
+const getLogs = (req, res, next) => {
+  fs.readFile(path.join('/app', 'users', 'users-log.txt'), (err, data) => {
+    if (err) {
+      createAndThrowError('Could not open logs file.', 500);
+    } else {
+      const dataArr = data.toString().split('\n');
+      res.status(200).json({ logs: dataArr });
+    }
+  });
+};
 
 exports.createUser = createUser;
 exports.verifyUser = verifyUser;
-// exports.getLogs = getLogs;
+exports.getLogs = getLogs;
