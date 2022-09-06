@@ -27,10 +27,6 @@ spec:
       containers:
       - name: tasks-api-container
         image: rwijupal3058/tasks-api:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
         - containerPort: 3000
         env:

@@ -56,6 +56,8 @@ spec:
     spec:
       containers:
         - name: users-api-container
+          ports:
+          - containerPort: 3000
           image: rwijupal3058/users-api:latest
           env:
             - name: MONGODB_CONNECTION_URI
